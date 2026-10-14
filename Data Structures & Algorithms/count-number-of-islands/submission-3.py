@@ -1,0 +1,26 @@
+class Solution:
+    def numIslands(self, grid: List[List[str]]) -> int:
+        result = 0
+        nr, nc = len(grid), len(grid[0])
+
+        def dfs(r, c):
+            if 0 > r or nr <= r or 0 > c or nc <= c: 
+                return
+            if grid[r][c] != "1": 
+                return
+            
+            grid[r][c] = "0"
+            dfs(r + 1, c)
+            dfs(r - 1, c)
+            dfs(r, c + 1)
+            dfs(r, c - 1)
+
+
+        for r in range(nr): 
+            for c in range(nc): 
+                if grid[r][c] == "1": 
+                    dfs(r,c)
+                    result += 1
+
+
+        return result
